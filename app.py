@@ -134,8 +134,10 @@ h1{font-size:2.1rem!important}
 [data-testid="stSidebar"] .stButton>button{min-height:36px!important;padding:.4rem .75rem!important;font-size:.82rem!important}
 .block-container{padding-top:.65rem!important;max-width:1280px!important}
 .fac-header{padding-bottom:8px!important;margin-bottom:8px!important}
-.fac-brand h1{font-size:1.65rem!important}
-.fac-brand p{font-size:.72rem!important}
+.fac-brand h1{font-size:clamp(2.15rem,3.3vw,3.15rem)!important;line-height:1.14!important;letter-spacing:-.035em!important;margin-bottom:8px!important}
+.fac-brand p{font-size:clamp(.83rem,1.05vw,1rem)!important;line-height:1.45!important}
+.fac-header{align-items:center!important;min-height:112px!important}
+@media(max-width:650px){.fac-brand h1{font-size:2rem!important}.fac-brand p{font-size:.8rem!important}.fac-header{min-height:0!important}}
 .fac-institutions img{max-height:42px!important}
 .fac-data-intro{padding:25px 0 14px}
 .fac-data-eyebrow{color:#b18423;font-size:.75rem;font-weight:800;letter-spacing:.15em}
@@ -241,7 +243,7 @@ if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publ
   st.markdown('''<section class="fac-feature"><h2>Experimente o FAC-IA Saúde</h2><h3>Da metodologia à experiência interativa</h3><p>Conheça os domínios, explore os 45 critérios de conformidade e compreenda como o instrumento pode apoiar avaliações estruturadas de modelos de Inteligência Artificial em saúde.</p></section>''',unsafe_allow_html=True)
   if st.button('Iniciar avaliação na plataforma →',type='primary',key='cta_start_bottom',use_container_width=True):navigate('Visão geral');st.rerun()
  elif page=='O Projeto':
-  st.markdown('<div class="fac-section"><h2>Sobre o FAC-IA Saúde</h2><p>O framework é um artefato acadêmico desenvolvido no contexto da dissertação “Avaliação e Conformidade de Modelos de IA Responsável em Saúde”, no PPGIT/UFMG, sob orientação do Prof. Dr. Wagner Meira Jr. A proposta reúne aspectos técnicos, éticos e regulatórios para apoiar a avaliação de modelos de IA em saúde.</p></div>',unsafe_allow_html=True)
+  st.markdown('<div class="fac-section"><h2>Sobre o FAC-IA Saúde</h2><p>O framework é um artefato acadêmico desenvolvido no contexto da dissertação “Avaliação e Conformidade de Modelos de IA Responsável em Saúde”, no PPGIT/UFMG, sob orientação do Prof. Dr. Wagner Meira Jr., com apoio acadêmico da Prof.ª Dr.ª Patrícia Martins Parreiras, do Instituto René Rachou (Fiocruz Minas). A proposta reúne aspectos técnicos, éticos e regulatórios para apoiar a avaliação de modelos de IA em saúde.</p></div>',unsafe_allow_html=True)
   st.markdown('<div class="fac-cards"><div class="fac-card"><b>3 perspectivas</b><p>Técnica, ética e regulatória.</p></div><div class="fac-card"><b>5 domínios</b><p>Governança; dados e LGPD; segurança e risco clínico; transparência e explicabilidade; robustez e monitoramento.</p></div><div class="fac-card"><b>45 critérios</b><p>Escala ordinal de 0 a 4, com estados AV, NA e NV e evidências associadas.</p></div></div>',unsafe_allow_html=True)
  elif page=='Metodologia':
   st.markdown('<div class="fac-section"><h2>Percurso metodológico</h2><p>A pesquisa adota Design Science Research (DSR): identificação do problema e fundamentação; desenvolvimento do artefato FAC-IA Saúde; aplicação exploratória no contexto MIMIC-IV; análise dos resultados e limitações; síntese das contribuições e perspectivas futuras.</p></div>',unsafe_allow_html=True)
@@ -252,7 +254,7 @@ if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publ
   st.link_button('Abrir a plataforma publicada ↗','https://fac-ia-saude-ppgit.streamlit.app/',use_container_width=True)
   st.markdown('<div class="fac-cards"><div class="fac-card"><b>1 · Cadastrar</b><p>Identifique o sistema ou modelo.</p></div><div class="fac-card"><b>2 · Avaliar</b><p>Registre pontuações, status e evidências.</p></div><div class="fac-card"><b>3 · Analisar</b><p>Consulte resultados e exporte relatórios.</p></div></div>',unsafe_allow_html=True)
  elif page=='Pesquisador':
-  st.markdown(f'''<div class="fac-profile"><img alt="Fotografia do pesquisador" src="{image_data(ROOT/'assets/pesquisador.jpeg')}"><div><div class="fac-eyebrow">Pesquisador responsável</div><h3>Bruno Martins Bartolomeu</h3><p>Mestrando no Programa de Pós-Graduação em Inovação Tecnológica da Universidade Federal de Minas Gerais (PPGIT/UFMG), sob orientação do Prof. Dr. Wagner Meira Jr., do Departamento de Ciência da Computação (DCC/UFMG).</p><p>Profissional de Tecnologia da Informação e Dados, com atuação em análise de dados, inteligência de negócios, liderança técnica e docência no ensino superior. Sua pesquisa aborda avaliação, governança, ética e conformidade da IA em saúde.</p></div></div>''',unsafe_allow_html=True)
+  st.markdown(f'''<div class="fac-profile"><img alt="Fotografia do pesquisador" src="{image_data(ROOT/'assets/pesquisador.jpeg')}"><div><div class="fac-eyebrow">Pesquisador responsável</div><h3>Bruno Martins Bartolomeu</h3><p>Mestrando no Programa de Pós-Graduação em Inovação Tecnológica da Universidade Federal de Minas Gerais (PPGIT/UFMG), sob orientação do Prof. Dr. Wagner Meira Jr., do Departamento de Ciência da Computação (DCC/UFMG), com apoio acadêmico da Prof.ª Dr.ª Patrícia Martins Parreiras, do Instituto René Rachou (Fiocruz Minas).</p><p>Profissional de Tecnologia da Informação e Dados, com atuação em análise de dados, inteligência de negócios, liderança técnica e docência no ensino superior. Sua pesquisa aborda avaliação, governança, ética e conformidade da IA em saúde.</p></div></div>''',unsafe_allow_html=True)
   st.link_button('Consultar Currículo Lattes ↗','http://lattes.cnpq.br/4479037178271028')
  elif page=='Publicações':
   st.markdown('<div class="fac-section"><h2>Produção científica e perspectivas</h2><p>Quatro frentes de artigos relacionadas à pesquisa e uma proposta editorial. Os itens abaixo são temas planejados e não representam, por si só, publicações concluídas ou aceitas.</p></div>',unsafe_allow_html=True)
