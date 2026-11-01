@@ -1,0 +1,362 @@
+[
+  {
+    "codigo": "1.1",
+    "dominio": "Governança",
+    "criterio": "Estrutura institucional",
+    "requisito": "Existência de estrutura formal de governança para IA Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Organograma, ato constitutivo ou política",
+    "procedimento": "Verificar responsáveis e instâncias formalmente designadas"
+  },
+  {
+    "codigo": "1.2",
+    "dominio": "Governança",
+    "criterio": "Políticas e diretrizes de IA",
+    "requisito": "Existência de políticas documentadas para uso de IA Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Política institucional e versões aprovadas",
+    "procedimento": "Conferir aprovação, escopo e vigência"
+  },
+  {
+    "codigo": "1.3",
+    "dominio": "Governança",
+    "criterio": "Responsabilidades e papéis",
+    "requisito": "Definição de responsabilidades por decisões e controles Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Matriz RACI, descrições de funções",
+    "procedimento": "Confrontar atribuições com o processo avaliado"
+  },
+  {
+    "codigo": "1.4",
+    "dominio": "Governança",
+    "criterio": "Gestão do ciclo de vida",
+    "requisito": "Controles nas etapas de concepção, implantação e revisão Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Plano de ciclo de vida, registros de mudanças",
+    "procedimento": "Verificar etapas e aprovações documentadas"
+  },
+  {
+    "codigo": "1.5",
+    "dominio": "Governança",
+    "criterio": "Gestão de riscos organizacionais",
+    "requisito": "Processo institucional de identificação e tratamento de riscos Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Registro de riscos, planos de tratamento",
+    "procedimento": "Examinar identificação, responsáveis e acompanhamento"
+  },
+  {
+    "codigo": "1.6",
+    "dominio": "Governança",
+    "criterio": "Capacitação e cultura organizacional",
+    "requisito": "Capacitação pertinente dos profissionais envolvidos Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Planos e registros de treinamento",
+    "procedimento": "Verificar conteúdo, público e periodicidade"
+  },
+  {
+    "codigo": "1.7",
+    "dominio": "Governança",
+    "criterio": "Auditoria e prestação de contas",
+    "requisito": "Mecanismos de revisão e responsabilização Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Relatórios de auditoria, atas e ações corretivas",
+    "procedimento": "Examinar achados, responsáveis e encerramento"
+  },
+  {
+    "codigo": "1.8",
+    "dominio": "Governança",
+    "criterio": "Participação de partes interessadas",
+    "requisito": "Consulta documentada a atores afetados Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Atas, registros de consulta e respostas",
+    "procedimento": "Verificar participação e tratamento das contribuições"
+  },
+  {
+    "codigo": "1.9",
+    "dominio": "Governança",
+    "criterio": "Melhoria contínua e revisão periódica",
+    "requisito": "Revisão documentada de controles e processos Pilares: Regulatório / Ético",
+    "evidencias_esperadas": "Cronogramas, indicadores e planos de melhoria",
+    "procedimento": "Verificar revisões e ações executadas"
+  },
+  {
+    "codigo": "2.1",
+    "dominio": "Dados e LGPD",
+    "criterio": "Qualidade dos dados",
+    "requisito": "Verificação de completude, consistência e qualidade Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Relatórios de qualidade e dicionário de dados",
+    "procedimento": "Examinar métricas, limites e tratamento de falhas"
+  },
+  {
+    "codigo": "2.2",
+    "dominio": "Dados e LGPD",
+    "criterio": "Representatividade e diversidade",
+    "requisito": "Análise da composição dos dados frente à população-alvo Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Perfil amostral e análises por subgrupos",
+    "procedimento": "Comparar grupos representados e população de uso"
+  },
+  {
+    "codigo": "2.3",
+    "dominio": "Dados e LGPD",
+    "criterio": "Rastreabilidade e procedência",
+    "requisito": "Registro da origem e transformações dos dados Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Linhagem, metadados e logs de processamento",
+    "procedimento": "Rastrear amostras e etapas de transformação"
+  },
+  {
+    "codigo": "2.4",
+    "dominio": "Dados e LGPD",
+    "criterio": "Minimização e finalidade",
+    "requisito": "Compatibilidade da coleta e uso com finalidade definida Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Inventário de dados e justificativa de uso",
+    "procedimento": "Confrontar campos utilizados com finalidades declaradas"
+  },
+  {
+    "codigo": "2.5",
+    "dominio": "Dados e LGPD",
+    "criterio": "Privacidade e anonimização",
+    "requisito": "Controles de privacidade e desidentificação adequados Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Protocolos de anonimização e avaliações de risco",
+    "procedimento": "Inspecionar métodos, acesso e riscos residuais"
+  },
+  {
+    "codigo": "2.6",
+    "dominio": "Dados e LGPD",
+    "criterio": "Segurança no armazenamento e acesso",
+    "requisito": "Controles de acesso e proteção de dados Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Políticas de acesso, logs e controles técnicos",
+    "procedimento": "Verificar perfis, autenticação e proteção aplicada"
+  },
+  {
+    "codigo": "2.7",
+    "dominio": "Dados e LGPD",
+    "criterio": "Conformidade com a LGPD",
+    "requisito": "Identificação e tratamento das obrigações legais pertinentes Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Registro de operações, bases legais e documentos de governança",
+    "procedimento": "Verificar evidências de atendimento às obrigações aplicáveis"
+  },
+  {
+    "codigo": "2.8",
+    "dominio": "Dados e LGPD",
+    "criterio": "Compartilhamento e uso secundário",
+    "requisito": "Regras para compartilhamento e reutilização Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Acordos, autorizações e registros de transferência",
+    "procedimento": "Conferir finalidade, permissões e salvaguardas"
+  },
+  {
+    "codigo": "2.9",
+    "dominio": "Dados e LGPD",
+    "criterio": "Gestão de incidentes e vazamentos",
+    "requisito": "Procedimento de detecção, resposta e registro de incidentes Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Plano de resposta e registros de ocorrências",
+    "procedimento": "Examinar fluxos, responsabilidades e testes"
+  },
+  {
+    "codigo": "3.1",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Validação do desempenho clínico",
+    "requisito": "Evidência de desempenho para finalidade clínica definida Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Protocolos e relatórios de validação",
+    "procedimento": "Conferir população, desfechos e métricas"
+  },
+  {
+    "codigo": "3.2",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Avaliação de riscos à segurança do paciente",
+    "requisito": "Identificação de perigos e controles clínicos Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Análise de riscos e plano de mitigação",
+    "procedimento": "Verificar cenários, controles e responsáveis"
+  },
+  {
+    "codigo": "3.3",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Análise de impacto clínico",
+    "requisito": "Análise de efeitos potenciais sobre decisões e pacientes Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Estudos de impacto e pareceres clínicos",
+    "procedimento": "Examinar efeitos esperados, danos e incertezas"
+  },
+  {
+    "codigo": "3.4",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Detecção e mitigação de vieses clínicos",
+    "requisito": "Investigação de diferenças relevantes entre grupos Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Resultados estratificados e planos de mitigação",
+    "procedimento": "Comparar métricas por subgrupo e registrar limitações"
+  },
+  {
+    "codigo": "3.5",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Interpretabilidade e integração assistencial",
+    "requisito": "Adequação das informações ao fluxo de trabalho clínico Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Protocolos de uso, telas e testes com profissionais",
+    "procedimento": "Verificar interpretação e integração ao processo"
+  },
+  {
+    "codigo": "3.6",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Definição de limites de uso",
+    "requisito": "Delimitação de indicações, contraindicações e limites Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Instruções de uso e documentação de escopo",
+    "procedimento": "Confrontar uso previsto com uso efetivo"
+  },
+  {
+    "codigo": "3.7",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Monitoramento de eventos adversos",
+    "requisito": "Processo para registrar e investigar eventos adversos Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Registros de eventos e investigação",
+    "procedimento": "Examinar notificações, análise e resposta"
+  },
+  {
+    "codigo": "3.8",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Reavaliação em mudanças de contexto",
+    "requisito": "Revisão de segurança em mudanças de população ou ambiente Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Relatórios de mudança e revalidação",
+    "procedimento": "Verificar gatilhos e resultados de reavaliação"
+  },
+  {
+    "codigo": "3.9",
+    "dominio": "Segurança e risco clínico",
+    "criterio": "Plano de resposta a incidentes",
+    "requisito": "Procedimentos de contenção e recuperação clínica Pilares: Técnico / Ético",
+    "evidencias_esperadas": "Plano de contingência e registros de simulação",
+    "procedimento": "Verificar ações, responsáveis e comunicação"
+  },
+  {
+    "codigo": "4.1",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Interpretabilidade dos modelos",
+    "requisito": "Disponibilidade de mecanismos de interpretação apropriados Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Documentação de modelo e análises interpretativas",
+    "procedimento": "Examinar adequação ao público e à tarefa"
+  },
+  {
+    "codigo": "4.2",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Documentação técnica e clínica",
+    "requisito": "Documentação de finalidade, dados, desempenho e limitações Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Ficha técnica, relatório clínico e versões",
+    "procedimento": "Conferir completude e atualização"
+  },
+  {
+    "codigo": "4.3",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Comunicação de resultados",
+    "requisito": "Comunicação compreensível de saídas e incertezas Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Relatórios, interfaces e orientações",
+    "procedimento": "Verificar clareza de resultados e limites"
+  },
+  {
+    "codigo": "4.4",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Explicação para diferentes públicos",
+    "requisito": "Explicações adequadas a profissionais, gestores e pacientes Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Materiais e exemplos por público",
+    "procedimento": "Comparar conteúdo com necessidades de cada público"
+  },
+  {
+    "codigo": "4.5",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Supervisão humana",
+    "requisito": "Possibilidade documentada de revisão e intervenção humana Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Fluxos de decisão, permissões e registros",
+    "procedimento": "Verificar autoridade e meios de intervenção"
+  },
+  {
+    "codigo": "4.6",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Registro de decisões e rastreabilidade",
+    "requisito": "Registro auditável das decisões e intervenções Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Logs, trilhas de auditoria e registros clínicos",
+    "procedimento": "Rastrear decisão e participação humana"
+  },
+  {
+    "codigo": "4.7",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Disponibilização de informações relevantes",
+    "requisito": "Acesso às informações necessárias para uso responsável Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Avisos, documentação e políticas de acesso",
+    "procedimento": "Verificar disponibilidade ao público pertinente"
+  },
+  {
+    "codigo": "4.8",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Engajamento de usuários e pacientes",
+    "requisito": "Mecanismos para colher e tratar contribuições Pilares: Ético / Técnico",
+    "evidencias_esperadas": "Pesquisas, atas e registros de retorno",
+    "procedimento": "Examinar participação e providências"
+  },
+  {
+    "codigo": "4.9",
+    "dominio": "Transparência e explicabilidade",
+    "criterio": "Avaliação da compreensibilidade",
+    "requisito": "Verificação da compreensão das explicações",
+    "evidencias_esperadas": "Testes de compreensão e relatórios",
+    "procedimento": "Conferir método, participantes e resultados"
+  },
+  {
+    "codigo": "5.1",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Desempenho em diferentes populações",
+    "requisito": "Avaliação de desempenho em subgrupos pertinentes Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Relatórios de métricas estratificadas",
+    "procedimento": "Comparar resultados e intervalos de incerteza"
+  },
+  {
+    "codigo": "5.2",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Generalização e transferibilidade",
+    "requisito": "Evidências de desempenho fora da amostra original Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Validações externas e protocolos",
+    "procedimento": "Verificar cenários e limitações de transferência"
+  },
+  {
+    "codigo": "5.3",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Robustez a variações e ruídos",
+    "requisito": "Testes sob perturbações e dados imperfeitos Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Relatórios de testes de robustez",
+    "procedimento": "Examinar cenários, tolerâncias e falhas"
+  },
+  {
+    "codigo": "5.4",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Monitoramento contínuo de desempenho",
+    "requisito": "Acompanhamento periódico de indicadores Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Painéis, logs e relatórios periódicos",
+    "procedimento": "Verificar métricas, frequência e responsáveis"
+  },
+  {
+    "codigo": "5.5",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Detecção de drift de dados e modelos",
+    "requisito": "Procedimentos para detectar mudanças relevantes Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Alertas, métricas de drift e relatórios",
+    "procedimento": "Examinar limites, alertas e ações"
+  },
+  {
+    "codigo": "5.6",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Atualização e retreinamento",
+    "requisito": "Processo controlado para atualizar o modelo Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Histórico de versões e relatórios de retreinamento",
+    "procedimento": "Conferir gatilhos, validação e aprovação"
+  },
+  {
+    "codigo": "5.7",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Reavaliação de riscos e impactos",
+    "requisito": "Revisão periódica de riscos durante a operação Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Registro de riscos atualizado",
+    "procedimento": "Verificar periodicidade e decisões"
+  },
+  {
+    "codigo": "5.8",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Manutenção de conformidade ao longo do tempo",
+    "requisito": "Revisão continuada dos requisitos aplicáveis Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Planos de revisão e registros de conformidade",
+    "procedimento": "Conferir revisões e correções"
+  },
+  {
+    "codigo": "5.9",
+    "dominio": "Robustez e monitoramento",
+    "criterio": "Registros de monitoramento e relatórios",
+    "requisito": "Retenção e disponibilidade de registros operacionais Pilares: Técnico / Regulatório",
+    "evidencias_esperadas": "Relatórios, logs e política de retenção",
+    "procedimento": "Verificar integridade, acesso e período coberto"
+  }
+]
