@@ -1,11 +1,10 @@
-# FAC-IA Saúde — atualização institucional clara
+FAC-IA Saúde — atualização visual e indicadores de IA na saúde
 
-A página **Início** agora contém a apresentação completa do projeto, do pesquisador, das quatro frentes de artigos, da proposta de livro e do acesso à plataforma. As abas específicas continuam disponíveis.
-
-A identidade visual troca botões pretos por branco, azul institucional e turquesa, incluindo contraste de texto.
-
-## Publicação
-Envie os arquivos deste pacote para a raiz do repositório GitHub, preservando `.streamlit/` e `assets/`, substituindo os arquivos existentes. Não publique `fac_ia.db` com dados reais. A entrada do Streamlit é `app.py`.
-
-## Nota
-Os artigos e o livro são descritos como frentes planejadas; não como publicações confirmadas. Teste o layout em desktop e celular após a publicação.
+- Menu da plataforma e avaliação preservados.
+- Botões de Share e demais itens da toolbar Streamlit ocultados por CSS. O menu de controle da barra superior deixa de aparecer; o controle de abertura da sidebar permanece.
+- Cabeçalho, logo e botões laterais menores.
+- Página Início: 3 indicadores contextualizados com fontes AMA e FDA, gráficos responsivos, links e ressalvas.
+- Seções duplicadas Pesquisador e Publicações removidas apenas da página Início; suas abas continuam disponíveis.
+- Dados: AMA 2024 (uso 38% em 2023 e 66% em 2024; percepção 68% em 2024), publicados em 2025; FDA mais de 1.600 dispositivos até setembro 2026. Indicadores referem-se aos EUA.
+- Para publicar: envie todos os arquivos/pastas deste ZIP ao repositório GitHub na branch main, preservando app.py na raiz.
+- Teste visualmente no desktop e mobile após publicar.

@@ -125,6 +125,38 @@ h1{font-size:2.1rem!important}
 .fac-publications {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0}
 .fac-publications .fac-card {border-top-color:#13a8b3}
 @media(max-width:760px){.fac-feature{padding:18px 15px}.fac-publications{grid-template-columns:1fr}.fac-landing{padding:26px 18px!important}}
+
+/* Ajustes de apresentação, cabeçalho compacto e ocultação dos controles de compartilhamento */
+[data-testid="stToolbar"], [data-testid="stDecoration"], [data-testid="stStatusWidget"]{display:none!important}
+[data-testid="stHeader"]{height:2.2rem!important;min-height:2.2rem!important;background:#f5f9fc!important}
+[data-testid="stSidebar"]{width:238px!important;min-width:238px!important}
+[data-testid="stSidebar"] [data-testid="stImage"]{max-width:165px;margin:0 auto 8px}
+[data-testid="stSidebar"] .stButton>button{min-height:36px!important;padding:.4rem .75rem!important;font-size:.82rem!important}
+.block-container{padding-top:.65rem!important;max-width:1280px!important}
+.fac-header{padding-bottom:8px!important;margin-bottom:8px!important}
+.fac-brand h1{font-size:1.65rem!important}
+.fac-brand p{font-size:.72rem!important}
+.fac-institutions img{max-height:42px!important}
+.fac-data-intro{padding:25px 0 14px}
+.fac-data-eyebrow{color:#b18423;font-size:.75rem;font-weight:800;letter-spacing:.15em}
+.fac-data-intro h2{font-size:clamp(1.35rem,2.1vw,1.95rem)!important;color:#0c2f50;margin:8px 0 12px}
+.fac-data-intro p{color:#49647c;line-height:1.65;max-width:920px}
+.fac-stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:8px 0 15px}
+.fac-stat-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid #dce8f0;border-top:4px solid #0c99aa;border-radius:16px;padding:20px;box-shadow:0 8px 24px #0c31540c}
+.fac-stat-kicker{font-size:.76rem;color:#54718a;text-transform:uppercase;letter-spacing:.07em;font-weight:800}
+.fac-stat-card h3{font-size:1.65rem!important;margin:12px 0 6px;color:#0b3557}
+.fac-stat-card p{font-size:.85rem;color:#526b80;line-height:1.55;min-height:70px}
+.fac-stat-card a{margin-top:auto;font-size:.75rem;color:#087b98;text-decoration:none;font-weight:700;padding-top:12px;overflow-wrap:anywhere}
+.fac-stat-number{font-size:3.3rem;line-height:1.2;color:#b58b2c;font-weight:800;margin:12px 0 6px}
+.fac-stat-number span{font-size:2rem}
+.fac-bar-group{margin:14px 0 8px}.fac-bar-label{display:flex;justify-content:space-between;color:#214963;font-size:.78rem;margin:9px 0 4px}
+.fac-bar-track{background:#eaf2f7;height:10px;border-radius:20px;overflow:hidden}.fac-bar-fill{height:100%;background:#91c9d5;border-radius:20px}.fac-bar-fill-strong{background:#079caf}
+.fac-stat-reading{background:#f0f8fb;border-left:3px solid #0b9dad;border-radius:6px;padding:10px;margin-top:14px;color:#254d66;font-size:.78rem;line-height:1.5}
+.fac-ring{width:104px;height:104px;margin:12px auto;background:conic-gradient(#b58b2c 0 68%,#e7eff5 68% 100%);border-radius:50%;display:grid;place-items:center}.fac-ring>div{display:grid;place-items:center;background:#fff;border-radius:50%;width:76px;height:76px;color:#0b3557;font-size:1.25rem;font-weight:800}
+.fac-device-visual{display:flex;gap:15px;align-items:center;justify-content:center;margin:12px 0;height:103px;color:#0a8b9e;font-weight:800;font-size:1.6rem}.fac-device-bars{display:flex;gap:7px;align-items:flex-end;height:85px}.fac-device-bars i{display:block;width:19px;border-radius:6px 6px 0 0;background:#b58b2c}
+.fac-evidence-note{font-size:.76rem;color:#647b8e;line-height:1.6;margin-bottom:23px}
+@media(max-width:980px){.fac-stats-grid{grid-template-columns:1fr 1fr}.fac-stat-card:last-child{grid-column:1/-1}}
+@media(max-width:650px){.fac-stats-grid{grid-template-columns:1fr}.fac-stat-card:last-child{grid-column:auto}.fac-stat-card p{min-height:0}.fac-data-intro{padding-top:15px}.fac-stat-card{padding:17px}.fac-brand h1{font-size:1.45rem!important}[data-testid="stSidebar"]{width:230px!important;min-width:230px!important}}
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -162,7 +194,7 @@ if 'page' not in st.session_state:st.session_state.page='Início'
 def navigate(target):
  st.session_state.page=target
 with st.sidebar:
- st.image(str(ROOT/'assets/fac_ia_logo.jpeg'),use_container_width=True)
+ st.image(str(ROOT/'assets/fac_ia_logo.jpeg'),width=165)
  st.markdown('**FAC-IA Saúde**  \nPesquisa acadêmica • PPGIT/UFMG')
  st.caption('MENU DA PLATAFORMA')
  for item in APP_PAGES:
@@ -198,18 +230,14 @@ if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publ
    if st.button('Experimentar a plataforma →',type='primary',use_container_width=True,key='cta_home'):navigate('Visão geral');st.rerun()
   with cta2:
    if st.button('Conhecer a metodologia',use_container_width=True,key='cta_method'):navigate('Metodologia');st.rerun()
+  st.markdown("""<section class="fac-data-intro"><div class="fac-data-eyebrow">IA NA SAÚDE · DADOS E EVIDÊNCIAS</div><h2>A inteligência artificial avança na prática clínica — e exige avaliação responsável</h2><p>Indicadores de pesquisas com médicos nos Estados Unidos e de dispositivos médicos autorizados pela FDA. Os dados mostram adoção, percepção de benefícios e expansão regulatória; não representam estimativas brasileiras.</p></section>""",unsafe_allow_html=True)
+  st.markdown("""<div class="fac-stats-grid">
+   <article class="fac-stat-card"><div class="fac-stat-kicker">Uso de IA por médicos · EUA</div><h3>De 38% para 66%</h3><p>Profissionais que declararam utilizar IA na prática, segundo levantamentos da AMA referentes a 2023 e 2024.</p><div class="fac-bar-group"><div class="fac-bar-label"><span>2023</span><b>38%</b></div><div class="fac-bar-track"><div class="fac-bar-fill" style="width:38%"></div></div><div class="fac-bar-label"><span>2024</span><b>66%</b></div><div class="fac-bar-track"><div class="fac-bar-fill fac-bar-fill-strong" style="width:66%"></div></div></div><div class="fac-stat-reading">+28 pontos percentuais na amostra pesquisada.</div><a href="https://www.ama-assn.org/press-center/ama-press-releases/ama-physician-enthusiasm-grows-health-care-ai" target="_blank" rel="noopener noreferrer">Fonte: American Medical Association (2025) ↗</a></article>
+   <article class="fac-stat-card"><div class="fac-stat-kicker">Percepção médica · EUA</div><div class="fac-stat-number">68<span>%</span></div><p>Dos médicos entrevistados em 2024 perceberam alguma vantagem ou vantagem clara no uso de ferramentas de IA.</p><div class="fac-ring" style="--pct:68"><div>68%</div></div><div class="fac-stat-reading">Indicador de percepção, não de eficácia clínica.</div><a href="https://www.ama-assn.org/press-center/ama-press-releases/ama-physician-enthusiasm-grows-health-care-ai" target="_blank" rel="noopener noreferrer">Fonte: American Medical Association (2025) ↗</a></article>
+   <article class="fac-stat-card"><div class="fac-stat-kicker">Dispositivos médicos · EUA</div><div class="fac-stat-number">+1.600</div><p>Dispositivos médicos habilitados por IA autorizados para comercialização pela FDA até setembro de 2026.</p><div class="fac-device-visual"><span>IA</span><div class="fac-device-bars"><i style="height:28%"></i><i style="height:43%"></i><i style="height:63%"></i><i style="height:85%"></i><i style="height:100%"></i></div></div><div class="fac-stat-reading">Total acumulado informado pela agência; não é medida de uso clínico.</div><a href="https://www.fda.gov/medical-devices/digital-health-center-excellence/artificial-intelligence-enabled-medical-devices" target="_blank" rel="noopener noreferrer">Fonte: FDA (setembro de 2026) ↗</a></article>
+  </div><div class="fac-evidence-note">Nota metodológica: dados de fontes e populações distintas, apresentados apenas como contexto. A pesquisa FAC-IA Saúde não produziu esses indicadores. A autorização regulatória de um dispositivo não garante adequação de qualquer aplicação específica.</div>""",unsafe_allow_html=True)
   st.markdown('''<section class="fac-feature"><h2>FAC-IA Saúde — Ciência, tecnologia e responsabilidade</h2><p><strong>Tecnologia, ciência e responsabilidade para uma Inteligência Artificial mais segura, transparente e confiável na saúde.</strong></p><p>O FAC-IA Saúde é uma iniciativa acadêmica desenvolvida no Programa de Pós-Graduação em Inovação Tecnológica (PPGIT), da Universidade Federal de Minas Gerais (UFMG), para contribuir com a avaliação multidimensional da conformidade de modelos de Inteligência Artificial aplicados à saúde.</p><p>A proposta integra aspectos técnicos, éticos e regulatórios em um instrumento estruturado de avaliação, apoiando a identificação de riscos, lacunas de governança, necessidades de transparência e oportunidades de melhoria.</p><p><strong>Explore o framework, conheça sua fundamentação científica e experimente a plataforma interativa.</strong></p></section>''',unsafe_allow_html=True)
   st.markdown('''<section class="fac-feature"><h2>Sobre o projeto</h2><h3>Da pesquisa científica à aplicação prática</h3><p>O FAC-IA Saúde foi desenvolvido como artefato de pesquisa com a metodologia <strong>Design Science Research (DSR)</strong>, no contexto da dissertação de mestrado <em>“Avaliação e Conformidade de Modelos de IA Responsável em Saúde”</em>.</p><ul><li><strong>3 pilares:</strong> técnico, ético e regulatório.</li><li><strong>5 domínios:</strong> governança; dados e LGPD; segurança e risco clínico; transparência e explicabilidade; robustez e monitoramento.</li><li><strong>45 critérios de avaliação</strong> organizados em matriz operacional.</li><li><strong>Escala de 0 a 4</strong>, com estados AV, NA e NV, evidências e indicadores de cobertura.</li></ul><p>A plataforma permite explorar critérios, registrar avaliações e visualizar resultados por domínio e dimensão. O instrumento está em desenvolvimento acadêmico e aplicação exploratória; não constitui certificação regulatória ou validação de segurança clínica.</p></section>''',unsafe_allow_html=True)
-  st.markdown('''<section class="fac-feature"><h2>Sobre o pesquisador</h2><h3>Bruno Martins Bartolomeu</h3><p><strong>Pesquisador em Inteligência Artificial Responsável | Ciência de Dados | Governança de IA</strong></p><p>Mestrando no PPGIT/UFMG, sob orientação do Prof. Dr. Wagner Meira Jr., do Departamento de Ciência da Computação (DCC/UFMG).</p><p>Atua em Tecnologia da Informação e Dados, com experiência em análise de dados, inteligência de negócios, soluções tecnológicas, liderança de equipes e docência no ensino superior.</p><p>Sua pesquisa concentra-se em avaliação de conformidade, governança, transparência e responsabilidade da Inteligência Artificial, especialmente na saúde. O FAC-IA Saúde integra sua trajetória profissional em tecnologia à pesquisa acadêmica.</p></section>''',unsafe_allow_html=True)
-  left,right=st.columns([1,2],gap='medium')
-  with left:st.image(str(ROOT/'assets/pesquisador.jpeg'),caption='Bruno Martins Bartolomeu',use_container_width=True)
-  with right:
-   st.markdown('### Pesquisador responsável')
-   st.markdown('**PPGIT / Universidade Federal de Minas Gerais**')
-   st.link_button('Consultar Currículo Lattes ↗','http://lattes.cnpq.br/4479037178271028',use_container_width=True)
-  st.markdown('''<section class="fac-feature"><h2>Produção científica e perspectivas</h2><p>A pesquisa estabelece uma base para aprofundamento científico em governança, conformidade e IA Responsável em Saúde. Estão previstas quatro frentes de artigos e uma proposta de livro. Os temas abaixo representam planejamento acadêmico, não necessariamente publicações concluídas.</p></section>''',unsafe_allow_html=True)
-  st.markdown('<div class="fac-publications">'+''.join(f'<div class="fac-card"><b>{label}</b><p>{title}</p></div>' for label,title in PUBLICATIONS)+'</div>',unsafe_allow_html=True)
-  st.markdown('''<div class="fac-card"><b>📖 Proposta de livro</b><p><em>IA Responsável em Saúde: Fundamentos, Avaliação e Conformidade com o FAC-IA Saúde.</em></p></div>''',unsafe_allow_html=True)
   st.markdown('''<section class="fac-feature"><h2>Experimente o FAC-IA Saúde</h2><h3>Da metodologia à experiência interativa</h3><p>Conheça os domínios, explore os 45 critérios de conformidade e compreenda como o instrumento pode apoiar avaliações estruturadas de modelos de Inteligência Artificial em saúde.</p></section>''',unsafe_allow_html=True)
   if st.button('Iniciar avaliação na plataforma →',type='primary',key='cta_start_bottom',use_container_width=True):navigate('Visão geral');st.rerun()
  elif page=='O Projeto':
