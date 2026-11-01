@@ -312,6 +312,22 @@ h1{font-size:2.1rem!important}
 [data-testid="stExpander"] [data-testid="stRadio"] label p{color:#123250!important}
 @media(max-width:767px){.fac-criteria-table{font-size:.88rem}.fac-criteria-table td{padding:12px 10px}.fac-criteria-scroll{max-height:540px}}
 
+
+/* Filtro de domínio: chips claros, responsivos, sem cabeçalho escuro ou bolinhas */
+.fac-filter-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;color:#416582;margin:20px 0 10px}
+.st-key-base_criterios_dominio [role="radiogroup"]{display:flex!important;flex-wrap:wrap!important;gap:9px!important;align-items:stretch!important}
+.st-key-base_criterios_dominio [role="radiogroup"] label{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:43px!important;padding:9px 16px!important;margin:0!important;background:#fff!important;border:1px solid #bddbe8!important;border-radius:11px!important;box-shadow:0 2px 7px #103a5510!important;cursor:pointer!important;transition:background .15s,color .15s!important}
+.st-key-base_criterios_dominio [role="radiogroup"] label:has(input:checked){background:#07869d!important;border-color:#07869d!important;box-shadow:0 3px 12px #087f9c20!important}
+.st-key-base_criterios_dominio [role="radiogroup"] label p{font-size:.88rem!important;font-weight:600!important;color:#17405c!important;white-space:normal!important;line-height:1.25!important}
+.st-key-base_criterios_dominio [role="radiogroup"] label:has(input:checked) p{color:#fff!important}
+.st-key-base_criterios_dominio [role="radiogroup"] label [data-baseweb="radio"]{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important}
+.st-key-base_criterios_dominio [role="radiogroup"] label:focus-within{outline:2px solid #22a8b5!important;outline-offset:2px!important}
+@media(max-width:767px){
+ .st-key-base_criterios_dominio [role="radiogroup"]{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .st-key-base_criterios_dominio [role="radiogroup"] label{padding:10px 8px!important;min-height:54px!important;text-align:center!important}
+ .st-key-base_criterios_dominio [role="radiogroup"] label p{font-size:.83rem!important}
+}
+
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -573,9 +589,9 @@ if page=='Metodologia e limites':
 if page=='Base de critérios':
  st.subheader('Base de critérios · Apêndice A')
  st.caption('Consulta à matriz operacional dos 45 critérios, preservada do projeto original.')
- # O filtro utiliza botões claros, evitando o menu escuro nativo do navegador.
- with st.expander('Filtrar por domínio', expanded=False):
-  domain_filter=st.radio('Selecione o domínio',['Todos']+DOMAINS, key='base_criterios_dominio', label_visibility='collapsed')
+ # Filtro em formato de abas horizontais, sem expander e sem dropdown escuro.
+ st.markdown('<div class="fac-filter-title">FILTRAR POR DOMÍNIO</div>', unsafe_allow_html=True)
+ domain_filter=st.radio('Selecione o domínio', ['Todos']+DOMAINS, key='base_criterios_dominio', horizontal=True, label_visibility='collapsed')
  filtered=[x for x in CRITERIA if domain_filter=='Todos' or x['dominio']==domain_filter]
  st.caption(f'{len(filtered)} critério(s) exibido(s)')
  # Tabela HTML com cores controladas: o st.dataframe utiliza canvas com tema escuro em alguns dispositivos.
