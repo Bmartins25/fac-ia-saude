@@ -200,6 +200,49 @@ h1{font-size:2.1rem!important}
 [data-baseweb="popover"] [role="option"]{background:#ffffff!important;color:#123250!important}
 [data-baseweb="popover"] [role="option"]:hover{background:#e6f6fa!important}
 
+
+/* FAC-IA Saúde — ajustes específicos para telas de celular (2026) */
+@media screen and (max-width: 767px) {
+  html {font-size:16px!important;-webkit-text-size-adjust:100%}
+  .block-container {padding:1.15rem 1rem 4rem!important;max-width:100%!important}
+  .fac-header {min-height:0!important;gap:12px!important;margin-bottom:14px!important;padding:4px 0 8px!important;align-items:center!important;text-align:center!important}
+  .fac-brand {width:100%}
+  .fac-brand h1 {font-size:clamp(2.1rem,8.8vw,2.75rem)!important;line-height:1.15!important;margin:0 0 12px!important;letter-spacing:-.04em!important}
+  .fac-brand p {font-size:1rem!important;line-height:1.55!important;max-width:36rem;margin:0 auto!important}
+  .fac-institutions {justify-content:center!important;width:100%;gap:15px!important}
+  .fac-institutions img {max-height:56px!important;max-width:125px!important}
+  .fac-institutions .separator {height:42px!important}
+  .fac-nav-caption {font-size:.83rem!important;letter-spacing:.14em!important;margin:18px 0 12px!important}
+  /* Navegação: dois botões por linha, com área de toque e fontes maiores */
+  [data-testid="stHorizontalBlock"]:has(button[key^="nav_"]) {gap:.7rem!important}
+  [data-testid="stHorizontalBlock"]:has(button[key^="nav_"]) > [data-testid="stColumn"] {flex:1 1 calc(50% - .4rem)!important;min-width:calc(50% - .4rem)!important}
+  [data-testid="stHorizontalBlock"]:has(button[key^="nav_"]) .stButton>button {min-height:55px!important;font-size:1rem!important;font-weight:650!important;padding:.65rem .5rem!important;line-height:1.25!important}
+  .fac-landing {padding:28px 20px!important;border-radius:18px!important}
+  .fac-landing h2 {font-size:clamp(2rem,8vw,2.6rem)!important;line-height:1.14!important}
+  .fac-landing p {font-size:1.02rem!important;line-height:1.7!important}
+  .fac-tag {font-size:.87rem!important}
+  .fac-profile {grid-template-columns:minmax(0,1fr)!important;gap:16px!important;padding:18px!important;border-radius:18px!important;align-items:start!important}
+  .fac-profile img {display:block!important;width:100%!important;max-width:100%!important;height:240px!important;object-fit:cover!important;object-position:center 25%!important;border-radius:14px!important}
+  .fac-profile h3 {font-size:1.65rem!important;line-height:1.2!important;margin:8px 0 14px!important}
+  .fac-profile p {font-size:1rem!important;line-height:1.7!important;margin:0 0 15px!important}
+  .fac-eyebrow {font-size:.78rem!important;letter-spacing:.12em!important}
+  .fac-section h2,.fac-data-intro h2 {font-size:1.55rem!important;line-height:1.28!important}
+  .fac-section p,.fac-card p,.fac-method-card p {font-size:1rem!important;line-height:1.7!important}
+  .fac-card {padding:19px!important}
+  .fac-card b,.fac-method-card strong {font-size:1.03rem!important}
+  .fac-panel {padding:17px!important}
+  .fac-footer {font-size:.83rem!important;line-height:1.6!important}
+  [data-testid="stForm"] {padding:16px!important}
+  [data-testid="stForm"] input,[data-testid="stForm"] textarea {font-size:16px!important}
+  [data-testid="stForm"] label p {font-size:.95rem!important}
+  [data-testid="stSidebar"] {width:min(82vw,300px)!important;min-width:0!important}
+}
+@media screen and (max-width: 380px) {
+  .fac-brand h1 {font-size:2rem!important}
+  .fac-institutions img {max-width:100px!important}
+  [data-testid="stHorizontalBlock"]:has(button[key^="nav_"]) .stButton>button {font-size:.93rem!important}
+}
+
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
