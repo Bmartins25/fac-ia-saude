@@ -244,6 +244,29 @@ h1{font-size:2.1rem!important}
 }
 
 
+/* Navegação das ferramentas: alternativa visível ao menu lateral recolhido no celular */
+@media (min-width: 768px) {
+  [class*="st-key-mobile_app_menu"] {display:none!important}
+}
+@media (max-width: 767px) {
+  [class*="st-key-mobile_app_menu"] {display:block!important;margin:0 0 1.1rem!important}
+  [class*="st-key-mobile_app_menu"] [data-testid="stExpander"] {
+    border:1px solid #9dcfe0!important;border-radius:14px!important;
+    background:#fff!important;overflow:hidden!important;
+  }
+  [class*="st-key-mobile_app_menu"] [data-testid="stExpander"] summary {
+    background:#087f98!important;color:#fff!important;min-height:56px!important;
+    font-weight:750!important;font-size:1rem!important;padding:13px 16px!important;
+  }
+  [class*="st-key-mobile_app_menu"] [data-testid="stExpander"] summary * {color:#fff!important}
+  [class*="st-key-mobile_app_menu"] .stButton>button {
+    min-height:49px!important;font-size:.96rem!important;white-space:normal!important;
+    background:#f1f9fc!important;color:#0b3554!important;border:1px solid #b8dce9!important;
+  }
+  [class*="st-key-mobile_app_menu"] .stButton>button[kind="primary"] {
+    background:#07869d!important;color:#fff!important;border-color:#07869d!important;
+  }
+}
 /* FAC-IA: contato sem componentes escuros, inclusive em temas nativos do navegador */
 [data-testid="stForm"] [data-testid="stRadio"] {
   background:#f1f9fc!important;border:1px solid #c7e2eb!important;
@@ -318,6 +341,16 @@ with st.sidebar:
  st.divider()
  st.caption('3 pilares • 5 domínios • 45 critérios')
 page=st.session_state.page
+# O Streamlit recolhe a sidebar no celular; esta navegação replica todas as ferramentas.
+# É ocultada apenas em telas largas via CSS; no desktop a sidebar original permanece.
+with st.container(key='mobile_app_menu'):
+ with st.expander('☰  MENU DA PLATAFORMA · Abrir ferramentas',expanded=False):
+  st.caption('Acesse os recursos de avaliação do FAC-IA Saúde')
+  for tool_page in APP_PAGES:
+   if st.button(tool_page,key='mobile_tool_'+tool_page,use_container_width=True,
+                type='primary' if page==tool_page else 'secondary'):
+    navigate(tool_page)
+    st.rerun()
 if page in APP_PAGES:
  if st.button('← Voltar ao site institucional',key='back_home'):
   navigate('Início');st.rerun()
