@@ -243,6 +243,35 @@ h1{font-size:2.1rem!important}
   [data-testid="stHorizontalBlock"]:has(button[key^="nav_"]) .stButton>button {font-size:.93rem!important}
 }
 
+
+/* FAC-IA: contato sem componentes escuros, inclusive em temas nativos do navegador */
+[data-testid="stForm"] [data-testid="stRadio"] {
+  background:#f1f9fc!important;border:1px solid #c7e2eb!important;
+  border-radius:12px!important;padding:12px 15px!important;
+  color:#123250!important;color-scheme:light!important;
+}
+[data-testid="stForm"] [data-testid="stRadio"] [role="radiogroup"] {
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px 14px!important;
+}
+[data-testid="stForm"] [data-testid="stRadio"] [role="radiogroup"] label {
+  background:#fff!important;color:#123250!important;border:1px solid #d4e6ee!important;
+  border-radius:9px!important;padding:8px!important;margin:0!important;
+}
+[data-testid="stForm"] [data-testid="stRadio"] [role="radiogroup"] label p {color:#123250!important;font-weight:500!important}
+[data-testid="stForm"] [data-testid="stRadio"] input {accent-color:#087f9c!important}
+[data-testid="stForm"] [data-testid="stRadio"] [data-baseweb="radio"] > div {background:transparent!important}
+[data-testid="stForm"] input,[data-testid="stForm"] textarea {color-scheme:light!important}
+@media screen and (max-width:767px) {
+  [data-testid="stForm"] [data-testid="stHorizontalBlock"] {flex-direction:column!important;gap:0!important}
+  [data-testid="stForm"] [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+    width:100%!important;min-width:100%!important;flex:1 1 100%!important;
+  }
+  [data-testid="stForm"] [data-testid="stRadio"] [role="radiogroup"] {grid-template-columns:1fr!important}
+  [data-testid="stForm"] [data-testid="stRadio"] label p {font-size:1rem!important}
+  [data-testid="stForm"] {padding:16px!important}
+}
+
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -370,7 +399,7 @@ if page in PUBLIC_PAGES:
     instituicao=st.text_input('Instituição / organização',placeholder='Universidade ou instituição')
    with cb:
     funcao=st.text_input('Cargo / função',placeholder='Pesquisador(a), docente, estudante...')
-    assunto=st.selectbox('Assunto *',['Colaboração científica','Dúvida sobre o FAC-IA Saúde','Pesquisa acadêmica','Convite para palestra','Outro'])
+    assunto=st.radio('Assunto *',['Colaboração científica','Dúvida sobre o FAC-IA Saúde','Pesquisa acadêmica','Convite para palestra','Outro'],index=0,key='fac_assunto_contato')
    mensagem=st.text_area('Como podemos colaborar? *',height=135,placeholder='Descreva sua mensagem ou proposta...')
    consentimento=st.checkbox('Concordo em utilizar os dados informados exclusivamente para compor esta mensagem de contato.')
    enviar=st.form_submit_button('Preparar mensagem',type='primary',use_container_width=True)
