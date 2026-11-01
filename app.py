@@ -77,6 +77,31 @@ h1{font-size:2.1rem!important}
  .fac-topnav span{font-size:.72rem;padding:7px 10px}
 }
 @media(max-width:390px){.fac-domains,.fac-steps{grid-template-columns:1fr}.fac-landing h2{font-size:1.7rem!important}}
+
+/* FAC-IA Saúde — identidade inspirada na arquitetura visual da Veritas, sem marca comercial */
+.fac-nav-caption{color:#627c91;font-size:.72rem;font-weight:800;letter-spacing:.12em;margin:4px 0 9px}
+.fac-landing{background:linear-gradient(110deg,#071e34 0%,#0b3451 58%,#096579 100%);border-radius:20px;box-shadow:0 20px 48px #071e3424}
+.fac-card{transition:transform .2s ease,box-shadow .2s ease;border-top:3px solid #0b9cae}
+.fac-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #0b2c4a19}
+.stButton>button{min-height:42px;font-weight:650;border-radius:10px}
+[data-testid="stSidebar"] .stButton>button{justify-content:flex-start;text-align:left}
+.fac-footer{border-top:2px solid #0c9bad}
+@media(max-width:900px){
+ .fac-landing{padding:30px 23px}
+ div[data-testid="stHorizontalBlock"]:has(button[key^="nav_"]){flex-wrap:wrap}
+}
+@media(max-width:768px){
+ .fac-landing{padding:27px 19px}
+ .fac-landing h2{font-size:clamp(1.8rem,7vw,2.5rem)!important}
+ .fac-header{align-items:center;text-align:center}
+ .fac-institutions{justify-content:center;width:100%}
+ .fac-nav-caption{text-align:center}
+ [data-testid="stHorizontalBlock"]{gap:.35rem}
+ [data-testid="stColumn"]{min-width:calc(50% - .35rem)!important;flex:1 1 calc(50% - .35rem)!important}
+ [data-testid="stColumn"] .stButton>button{font-size:.77rem;padding:.45rem .4rem;white-space:normal;line-height:1.15}
+ .fac-card{padding:18px}
+}
+@media(max-width:440px){.fac-profile img{max-width:100%;height:260px}.fac-domains{grid-template-columns:1fr}.fac-steps{grid-template-columns:1fr}}
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -108,11 +133,24 @@ def image_data(path):
     mime='jpeg' if suffix in ('jpg','jpeg') else 'png'
     return f"data:image/{mime};base64,{base64.b64encode(path.read_bytes()).decode()}"
 import base64
+PUBLIC_PAGES=['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato']
+APP_PAGES=['Visão geral','Sistemas cadastrados','Nova avaliação','Avaliar critérios','Resultados e scorecard','Relatório e exportação','Base de critérios','Metodologia e limites']
+if 'page' not in st.session_state:st.session_state.page='Início'
+def navigate(target):
+ st.session_state.page=target
 with st.sidebar:
  st.image(str(ROOT/'assets/fac_ia_logo.jpeg'),use_container_width=True)
- st.markdown('**FAC-IA Saúde**  \nAvaliação de conformidade de IA responsável em saúde')
- page=st.radio('Navegação',['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato','Visão geral','Sistemas cadastrados','Nova avaliação','Avaliar critérios','Resultados e scorecard','Relatório e exportação','Base de critérios','Metodologia e limites'],label_visibility='collapsed')
- st.caption('MVP acadêmico • 3 perspectivas • 5 domínios • 45 critérios')
+ st.markdown('**FAC-IA Saúde**  \nPesquisa acadêmica • PPGIT/UFMG')
+ st.caption('MENU DA PLATAFORMA')
+ for item in APP_PAGES:
+  if st.button(item,key='side_'+item,use_container_width=True,type='primary' if st.session_state.page==item else 'secondary'):
+   navigate(item);st.rerun()
+ st.divider()
+ st.caption('3 perspectivas • 5 domínios • 45 critérios')
+page=st.session_state.page
+if page in APP_PAGES:
+ if st.button('← Voltar ao site institucional',key='back_home'):
+  navigate('Início');st.rerun()
 st.markdown(f'''<div class="fac-header"><div class="fac-brand"><h1>FAC-IA <span>Saúde</span></h1><p>Framework de Avaliação e Conformidade de Inteligência Artificial em Saúde</p></div><div class="fac-institutions"><img alt="UFMG" src="{image_data(ROOT/'assets/ufmg.png')}"><span class="separator"></span><img alt="PPGIT UFMG" src="{image_data(ROOT/'assets/ppgit.png')}"></div></div>''',unsafe_allow_html=True)
 if page not in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato']:
  st.markdown('''<div class="fac-hero"><h3>IA responsável, segurança e governança em saúde</h3><p>Instrumento computacional acadêmico para avaliação estruturada e acompanhamento de requisitos de conformidade de sistemas de inteligência artificial em saúde, fundamentado em três perspectivas, cinco domínios e 45 critérios.</p></div>''',unsafe_allow_html=True)
@@ -124,11 +162,19 @@ PUBLICATIONS=[
  ('Artigo 3','Percepção de profissionais de saúde sobre IA responsável: ética, confiança e governança'),
  ('Artigo 4','Transparência e explicabilidade em IA na saúde: diretrizes e evidências')]
 if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato']:
- st.markdown('<div class="fac-topnav">'+''.join(f'<span>{item}</span>' for item in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato'])+'</div>',unsafe_allow_html=True)
+ st.markdown('<div class="fac-nav-caption">EXPLORE O PROJETO</div>',unsafe_allow_html=True)
+ navcols=st.columns([1,1.3,1.3,1.2,1.3,1.3,1])
+ for col,item in zip(navcols,PUBLIC_PAGES):
+  with col:
+   if st.button(item,key='nav_'+item,use_container_width=True,type='primary' if page==item else 'secondary'):
+    navigate(item);st.rerun()
  if page=='Início':
   st.markdown('''<section class="fac-landing"><div class="fac-eyebrow">Pesquisa · Inovação · Inteligência Artificial Responsável</div><h2>Uma nova perspectiva para avaliar a <em>IA na saúde.</em></h2><p>Conheça o FAC-IA Saúde: um framework acadêmico de avaliação e conformidade que conecta tecnologia, ética e governança para apoiar análises estruturadas de modelos de inteligência artificial.</p><span class="fac-tag">3 perspectivas</span><span class="fac-tag">5 domínios</span><span class="fac-tag">45 critérios</span></section>''',unsafe_allow_html=True)
-  if st.button('Conhecer a plataforma de avaliação →',type='primary',use_container_width=True,key='cta_home'):st.session_state['go_platform']=True
-  if st.session_state.pop('go_platform',False):st.info('No menu lateral, selecione “Visão geral” para acessar o dashboard ou “Nova avaliação” para começar.')
+  cta1,cta2=st.columns(2)
+  with cta1:
+   if st.button('Experimentar a plataforma →',type='primary',use_container_width=True,key='cta_home'):navigate('Visão geral');st.rerun()
+  with cta2:
+   if st.button('Conhecer a metodologia',use_container_width=True,key='cta_method'):navigate('Metodologia');st.rerun()
   st.markdown('<div class="fac-section"><h2>Ciência aplicada à IA responsável</h2><p>Desenvolvido no Programa de Pós-Graduação em Inovação Tecnológica (PPGIT/UFMG), o FAC-IA Saúde transforma uma matriz metodológica de pesquisa em uma experiência digital de avaliação.</p></div>',unsafe_allow_html=True)
   st.markdown('<div class="fac-cards"><div class="fac-card"><b>◈ Avaliação estruturada</b><p>45 critérios distribuídos em cinco domínios de conformidade.</p></div><div class="fac-card"><b>◎ Evidências e transparência</b><p>Registro de evidências, justificativas e recomendações.</p></div><div class="fac-card"><b>▤ Resultados interpretáveis</b><p>Indicadores de conformidade e cobertura por avaliação.</p></div></div>',unsafe_allow_html=True)
  elif page=='O Projeto':
