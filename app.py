@@ -159,6 +159,16 @@ h1{font-size:2.1rem!important}
 .fac-evidence-note{font-size:.76rem;color:#647b8e;line-height:1.6;margin-bottom:23px}
 @media(max-width:980px){.fac-stats-grid{grid-template-columns:1fr 1fr}.fac-stat-card:last-child{grid-column:1/-1}}
 @media(max-width:650px){.fac-stats-grid{grid-template-columns:1fr}.fac-stat-card:last-child{grid-column:auto}.fac-stat-card p{min-height:0}.fac-data-intro{padding-top:15px}.fac-stat-card{padding:17px}.fac-brand h1{font-size:1.45rem!important}[data-testid="stSidebar"]{width:230px!important;min-width:230px!important}}
+
+/* Páginas institucionais — FAC-IA Saúde */
+.fac-method-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:18px 0}
+.fac-method-card{background:#fff;border:1px solid #d8e7f0;border-top:4px solid #089eb0;border-radius:14px;padding:17px 14px;min-height:155px}
+.fac-method-card strong{display:block;color:#092f53;font-size:.94rem;line-height:1.4}
+.fac-method-card p{font-size:.84rem;line-height:1.6;color:#43627b}
+.fac-contact-title{font-size:1.12rem;font-weight:800;color:#0b3658;margin:12px 0 14px}
+.fac-section .fac-eyebrow{color:#008b9f!important}
+@media(max-width:1050px){.fac-method-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.fac-method-grid{grid-template-columns:1fr}.fac-method-card{min-height:auto}}
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -190,14 +200,14 @@ def image_data(path):
     mime='jpeg' if suffix in ('jpg','jpeg') else 'png'
     return f"data:image/{mime};base64,{base64.b64encode(path.read_bytes()).decode()}"
 import base64
-PUBLIC_PAGES=['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato']
+PUBLIC_PAGES=['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Contato']
 APP_PAGES=['Visão geral','Sistemas cadastrados','Nova avaliação','Avaliar critérios','Resultados e scorecard','Relatório e exportação','Base de critérios','Metodologia e limites']
 if 'page' not in st.session_state:st.session_state.page='Início'
 def navigate(target):
  st.session_state.page=target
 with st.sidebar:
  st.image(str(ROOT/'assets/fac_ia_logo.jpeg'),width=165)
- st.markdown('**FAC-IA Saúde**  \nPesquisa acadêmica • PPGIT/UFMG')
+ st.markdown('**FAC-IA Saúde**  \nFramework Acadêmico • PPGIT/UFMG')
  st.caption('MENU DA PLATAFORMA')
  for item in APP_PAGES:
   if st.button(item,key='side_'+item,use_container_width=True,type='primary' if st.session_state.page==item else 'secondary'):
@@ -209,7 +219,7 @@ if page in APP_PAGES:
  if st.button('← Voltar ao site institucional',key='back_home'):
   navigate('Início');st.rerun()
 st.markdown(f'''<div class="fac-header"><div class="fac-brand"><h1>FAC-IA <span>Saúde</span></h1><p>Framework de Avaliação e Conformidade de Inteligência Artificial em Saúde</p></div><div class="fac-institutions"><img alt="UFMG" src="{image_data(ROOT/'assets/ufmg.png')}"><span class="separator"></span><img alt="PPGIT UFMG" src="{image_data(ROOT/'assets/ppgit.png')}"></div></div>''',unsafe_allow_html=True)
-if page not in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato']:
+if page not in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Contato']:
  st.markdown('''<div class="fac-hero"><h3>IA responsável, segurança e governança em saúde</h3><p>Instrumento computacional acadêmico para avaliação estruturada e acompanhamento de requisitos de conformidade de sistemas de inteligência artificial em saúde, fundamentado em três perspectivas, cinco domínios e 45 critérios.</p></div>''',unsafe_allow_html=True)
 systems=fetch('SELECT * FROM systems ORDER BY id DESC');assessments=fetch('SELECT a.*,s.name system_name FROM assessments a JOIN systems s ON a.system_id=s.id ORDER BY a.id DESC')
 
@@ -218,9 +228,9 @@ PUBLICATIONS=[
  ('Artigo 2','Análise exploratória com dados clínicos da MIMIC-IV: evidências e limitações'),
  ('Artigo 3','Percepção de profissionais de saúde sobre IA responsável: ética, confiança e governança'),
  ('Artigo 4','Transparência e explicabilidade em IA na saúde: diretrizes e evidências')]
-if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publicações','Contato']:
+if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Contato']:
  st.markdown('<div class="fac-nav-caption">EXPLORE O PROJETO</div>',unsafe_allow_html=True)
- navcols=st.columns([1,1.3,1.3,1.2,1.3,1.3,1])
+ navcols=st.columns([1,1.3,1.3,1.2,1.3,1.1])
  for col,item in zip(navcols,PUBLIC_PAGES):
   with col:
    if st.button(item,key='nav_'+item,use_container_width=True,type='primary' if page==item else 'secondary'):
@@ -243,27 +253,56 @@ if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publ
   st.markdown('''<section class="fac-feature"><h2>Experimente o FAC-IA Saúde</h2><h3>Da metodologia à experiência interativa</h3><p>Conheça os domínios, explore os 45 critérios de conformidade e compreenda como o instrumento pode apoiar avaliações estruturadas de modelos de Inteligência Artificial em saúde.</p></section>''',unsafe_allow_html=True)
   if st.button('Iniciar avaliação na plataforma →',type='primary',key='cta_start_bottom',use_container_width=True):navigate('Visão geral');st.rerun()
  elif page=='O Projeto':
-  st.markdown('<div class="fac-section"><h2>Sobre o FAC-IA Saúde</h2><p>O framework é um artefato acadêmico desenvolvido no contexto da dissertação “Avaliação e Conformidade de Modelos de IA Responsável em Saúde”, no PPGIT/UFMG, sob orientação do Prof. Dr. Wagner Meira Jr., com apoio acadêmico da Prof.ª Dr.ª Patrícia Martins Parreiras, do Instituto René Rachou (Fiocruz Minas). A proposta reúne aspectos técnicos, éticos e regulatórios para apoiar a avaliação de modelos de IA em saúde.</p></div>',unsafe_allow_html=True)
-  st.markdown('<div class="fac-cards"><div class="fac-card"><b>3 perspectivas</b><p>Técnica, ética e regulatória.</p></div><div class="fac-card"><b>5 domínios</b><p>Governança; dados e LGPD; segurança e risco clínico; transparência e explicabilidade; robustez e monitoramento.</p></div><div class="fac-card"><b>45 critérios</b><p>Escala ordinal de 0 a 4, com estados AV, NA e NV e evidências associadas.</p></div></div>',unsafe_allow_html=True)
+  st.markdown("""<div class="fac-section"><div class="fac-eyebrow">O PROJETO</div><h2>Da pesquisa científica à aplicação prática</h2><p>O FAC-IA Saúde é um artefato acadêmico desenvolvido na dissertação <em>“Avaliação e Conformidade de Modelos de IA Responsável em Saúde”</em>, no PPGIT/UFMG, sob orientação do <strong>Prof. Dr. Wagner Meira Jr.</strong> (DCC/UFMG), com apoio acadêmico da <strong>Prof.ª Dr.ª Patrícia Martins Parreiras</strong> (Instituto René Rachou — Fiocruz Minas).</p><p>A proposta integra dimensões técnicas, éticas e regulatórias para apoiar a identificação de riscos, lacunas de governança, transparência e oportunidades de melhoria na IA aplicada à saúde.</p></div>""",unsafe_allow_html=True)
+  st.image(str(ROOT/'assets/fac_estrutura.png'),caption='Estrutura conceitual do FAC-IA Saúde: três pilares, cinco domínios e 45 critérios.',use_container_width=True)
+  st.markdown('<div class="fac-cards"><div class="fac-card"><b>3 pilares</b><p>Técnico, ético e regulatório.</p></div><div class="fac-card"><b>5 domínios</b><p>Governança; Dados e LGPD; Segurança e risco clínico; Transparência e explicabilidade; Robustez e monitoramento.</p></div><div class="fac-card"><b>45 critérios</b><p>Nove por domínio; escala de 0 a 4, estados AV, NA e NV e registro de evidências.</p></div></div>',unsafe_allow_html=True)
+  st.info('O FAC-IA Saúde é um instrumento acadêmico de apoio à avaliação; não constitui certificação regulatória, comprovação de segurança clínica ou validação empírica integral.')
  elif page=='Metodologia':
-  st.markdown('<div class="fac-section"><h2>Percurso metodológico</h2><p>A pesquisa adota Design Science Research (DSR): identificação do problema e fundamentação; desenvolvimento do artefato FAC-IA Saúde; aplicação exploratória no contexto MIMIC-IV; análise dos resultados e limitações; síntese das contribuições e perspectivas futuras.</p></div>',unsafe_allow_html=True)
-  st.markdown('<div class="fac-cards"><div class="fac-card"><b>01 · Fundamentação</b><p>Problema, revisão teórica e referências éticas e regulatórias.</p></div><div class="fac-card"><b>02 · Construção</b><p>Matriz operacional com cinco domínios e 45 critérios.</p></div><div class="fac-card"><b>03 · Aplicação exploratória</b><p>Estudo conceitual apoiado em dados clínicos MIMIC-IV, sem equivaler à validação de sistema implantado.</p></div></div>',unsafe_allow_html=True)
-  st.info('O instrumento não constitui certificação regulatória, comprovação de segurança clínica ou validação empírica integral.')
+  st.markdown('<div class="fac-section"><div class="fac-eyebrow">METODOLOGIA</div><h2>Percurso metodológico da pesquisa</h2><p>A pesquisa utiliza <strong>Design Science Research (DSR)</strong>, articulando fundamentação, construção do artefato, aplicação exploratória, análise e síntese das contribuições.</p></div>',unsafe_allow_html=True)
+  st.image(str(ROOT/'assets/fac_percurso.png'),caption='Síntese visual das cinco etapas metodológicas.',use_container_width=True)
+  st.markdown('<div class="fac-method-grid"><div class="fac-method-card"><strong>01 · Problema e fundamentação</strong><p>Identificação do problema, revisão teórica e referências éticas e regulatórias.</p></div><div class="fac-method-card"><strong>02 · Desenvolvimento</strong><p>Construção da matriz operacional do FAC-IA Saúde: 3 pilares, 5 domínios e 45 critérios.</p></div><div class="fac-method-card"><strong>03 · Aplicação exploratória</strong><p>Uso conceitual no contexto de dados clínicos MIMIC-IV, sem avaliação de um sistema implantado.</p></div><div class="fac-method-card"><strong>04 · Análise e resultados</strong><p>Identificação de evidências, lacunas, limitações e oportunidades de melhoria.</p></div><div class="fac-method-card"><strong>05 · Síntese e contribuições</strong><p>Consolidação das contribuições e perspectivas de validação empírica futura.</p></div></div>',unsafe_allow_html=True)
+  st.info('A aplicação exploratória com MIMIC-IV não equivale à validação integral do framework em um sistema de IA implantado.')
  elif page=='Plataforma':
   st.markdown('<div class="fac-section"><h2>Experimente a plataforma</h2><p>Cadastre sistemas e modelos, inicie avaliações, registre evidências para os 45 critérios, visualize indicadores de conformidade e cobertura e exporte relatórios. Utilize o menu lateral para acessar as funcionalidades.</p></div>',unsafe_allow_html=True)
-  st.link_button('Abrir a plataforma publicada ↗','https://fac-ia-saude-ppgit.streamlit.app/',use_container_width=True)
+  # A navegação para o aplicativo ocorre diretamente pelo menu lateral.
   st.markdown('<div class="fac-cards"><div class="fac-card"><b>1 · Cadastrar</b><p>Identifique o sistema ou modelo.</p></div><div class="fac-card"><b>2 · Avaliar</b><p>Registre pontuações, status e evidências.</p></div><div class="fac-card"><b>3 · Analisar</b><p>Consulte resultados e exporte relatórios.</p></div></div>',unsafe_allow_html=True)
  elif page=='Pesquisador':
-  st.markdown(f'''<div class="fac-profile"><img alt="Fotografia do pesquisador" src="{image_data(ROOT/'assets/pesquisador.jpeg')}"><div><div class="fac-eyebrow">Pesquisador responsável</div><h3>Bruno Martins Bartolomeu</h3><p>Mestrando no Programa de Pós-Graduação em Inovação Tecnológica da Universidade Federal de Minas Gerais (PPGIT/UFMG), sob orientação do Prof. Dr. Wagner Meira Jr., do Departamento de Ciência da Computação (DCC/UFMG), com apoio acadêmico da Prof.ª Dr.ª Patrícia Martins Parreiras, do Instituto René Rachou (Fiocruz Minas).</p><p>Profissional de Tecnologia da Informação e Dados, com atuação em análise de dados, inteligência de negócios, liderança técnica e docência no ensino superior. Sua pesquisa aborda avaliação, governança, ética e conformidade da IA em saúde.</p></div></div>''',unsafe_allow_html=True)
+  st.markdown(f'''<div class="fac-profile"><img alt="Fotografia do pesquisador" src="{image_data(ROOT/'assets/pesquisador.jpeg')}"><div><div class="fac-eyebrow">Pesquisador responsável</div><h3>Bruno Martins Bartolomeu</h3><p>Mestrando no Programa de Pós-Graduação em Inovação Tecnológica da Universidade Federal de Minas Gerais (PPGIT/UFMG), sob orientação do <strong>Prof. Dr. Wagner Meira Jr.</strong>, do Departamento de Ciência da Computação (DCC/UFMG), com apoio acadêmico da <strong>Prof.ª Dr.ª Patrícia Martins Parreiras</strong>, do Instituto René Rachou (Fiocruz Minas).</p><p>Profissional de Tecnologia da Informação e Dados, com atuação em análise de dados, inteligência de negócios, liderança técnica e docência no ensino superior. Sua pesquisa aborda avaliação, governança, ética e conformidade da IA em saúde.</p></div></div>''',unsafe_allow_html=True)
   st.link_button('Consultar Currículo Lattes ↗','http://lattes.cnpq.br/4479037178271028')
- elif page=='Publicações':
-  st.markdown('<div class="fac-section"><h2>Produção científica e perspectivas</h2><p>Quatro frentes de artigos relacionadas à pesquisa e uma proposta editorial. Os itens abaixo são temas planejados e não representam, por si só, publicações concluídas ou aceitas.</p></div>',unsafe_allow_html=True)
-  for label,title in PUBLICATIONS:st.markdown(f'<div class="fac-card" style="margin-bottom:10px"><b>{label} · Em desenvolvimento / planejamento</b><p>{title}</p></div>',unsafe_allow_html=True)
-  st.markdown('<div class="fac-card"><b>Proposta de livro</b><p>IA Responsável em Saúde: Fundamentos, Avaliação e Conformidade com o FAC-IA Saúde.</p></div>',unsafe_allow_html=True)
  elif page=='Contato':
-  st.markdown('<div class="fac-section"><h2>Contato e colaboração científica</h2><p>O FAC-IA Saúde é um projeto de pesquisa acadêmica vinculado ao PPGIT/UFMG. Para conhecer a trajetória acadêmica do pesquisador ou estabelecer contato por canais institucionais, consulte o Currículo Lattes.</p></div>',unsafe_allow_html=True)
-  st.link_button('Currículo Lattes ↗','http://lattes.cnpq.br/4479037178271028')
- st.markdown('<div class="fac-footer">FAC-IA Saúde · Projeto acadêmico de mestrado · PPGIT / Universidade Federal de Minas Gerais · Belo Horizonte, 2026<br>Instrumento de apoio à avaliação; não constitui certificação regulatória nem comprovação de segurança clínica.</div>',unsafe_allow_html=True)
+  st.markdown("""<div class="fac-section"><div class="fac-eyebrow">CONTATO E COLABORAÇÃO</div><h2>Vamos conversar sobre IA responsável em saúde?</h2><p>Para colaboração científica, esclarecimentos sobre o framework, atividades acadêmicas ou propostas de pesquisa, utilize o formulário abaixo. O FAC-IA Saúde é uma iniciativa acadêmica, não um serviço de certificação ou consultoria regulatória.</p></div>""",unsafe_allow_html=True)
+  a,b=st.columns([1.15,1],gap='large')
+  with a:
+   st.markdown('<div class="fac-contact-title">Entre em contato</div>',unsafe_allow_html=True)
+   st.markdown('**Pesquisador:** Bruno Martins Bartolomeu  \n**Instituição:** PPGIT / Universidade Federal de Minas Gerais  \n**Localização:** Belo Horizonte — MG  \n**Área:** IA responsável, governança, avaliação e conformidade em saúde')
+   st.link_button('Consultar Currículo Lattes ↗','http://lattes.cnpq.br/4479037178271028')
+  with b:
+   st.markdown('<div class="fac-contact-title">Temas para colaboração</div>',unsafe_allow_html=True)
+   st.markdown('• Pesquisa e desenvolvimento do FAC-IA Saúde  \n• Governança e avaliação de IA em saúde  \n• Transparência e explicabilidade  \n• Aplicações acadêmicas e estudos exploratórios  \n• Parcerias e produção científica')
+  st.markdown('### Envie sua mensagem')
+  st.caption('Preencha o formulário para preparar uma mensagem no seu aplicativo de e-mail. Nenhum dado é enviado ou armazenado pelo site.')
+  with st.form('fac_contato',clear_on_submit=False):
+   ca,cb=st.columns(2)
+   with ca:
+    nome=st.text_input('Nome *',placeholder='Seu nome')
+    email=st.text_input('E-mail *',placeholder='seuemail@exemplo.com')
+    instituicao=st.text_input('Instituição / organização',placeholder='Universidade ou instituição')
+   with cb:
+    funcao=st.text_input('Cargo / função',placeholder='Pesquisador(a), docente, estudante...')
+    assunto=st.selectbox('Assunto *',['Colaboração científica','Dúvida sobre o FAC-IA Saúde','Pesquisa acadêmica','Convite para palestra','Outro'])
+   mensagem=st.text_area('Como podemos colaborar? *',height=135,placeholder='Descreva sua mensagem ou proposta...')
+   consentimento=st.checkbox('Concordo em utilizar os dados informados exclusivamente para compor esta mensagem de contato.')
+   enviar=st.form_submit_button('Preparar mensagem',type='primary',use_container_width=True)
+  if enviar:
+   if not nome.strip() or not email.strip() or '@' not in email or not mensagem.strip() or not consentimento:
+    st.error('Preencha nome, e-mail e mensagem, e confirme o consentimento.')
+   else:
+    corpo=f'Nome: {nome}\nE-mail: {email}\nInstituição: {instituicao}\nCargo: {funcao}\nAssunto: {assunto}\n\n{mensagem}'
+    # A página não dispõe de serviço de e-mail configurado; não afirmar envio.
+    st.success('Mensagem preparada. Copie o texto abaixo e encaminhe pelo canal de contato acadêmico de sua preferência.')
+    st.code(corpo,language=None)
+    st.caption('O formulário não envia e-mails automaticamente. Para envio direto, é necessário configurar um serviço de e-mail e um destinatário autorizado.')
+ st.markdown('<div class="fac-footer">FAC-IA Saúde · Framework Acadêmico · Projeto de mestrado · PPGIT / Universidade Federal de Minas Gerais · Belo Horizonte, 2026<br>Instrumento de apoio à avaliação; não constitui certificação regulatória nem comprovação de segurança clínica.</div>',unsafe_allow_html=True)
 
 if page=='Visão geral':
  a,b,c,d=st.columns(4)
