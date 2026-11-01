@@ -102,6 +102,29 @@ h1{font-size:2.1rem!important}
  .fac-card{padding:18px}
 }
 @media(max-width:440px){.fac-profile img{max-width:100%;height:260px}.fac-domains{grid-template-columns:1fr}.fac-steps{grid-template-columns:1fr}}
+
+/* Identidade clara FAC-IA: substitui controles escuros do tema Streamlit */
+.stApp {background:#f5f9fc!important;color:#123250!important}
+[data-testid="stHeader"] {background:#edf5f9!important}
+[data-testid="stToolbar"] {color:#18415d!important}
+.stButton>button[kind="secondary"],.stButton>button[data-testid="stBaseButton-secondary"] {background:#ffffff!important;color:#16476a!important;border:1px solid #bed9e6!important;box-shadow:0 2px 8px #12516a0b!important}
+.stButton>button[kind="secondary"]:hover,.stButton>button[data-testid="stBaseButton-secondary"]:hover {background:#e5f7fa!important;color:#006c85!important;border-color:#21a5b5!important}
+.stButton>button[kind="primary"],.stButton>button[data-testid="stBaseButton-primary"] {background:#087f9c!important;color:#ffffff!important;border:1px solid #087f9c!important;box-shadow:0 4px 12px #087f9c25!important}
+.stButton>button[kind="primary"]:hover {background:#06667f!important;color:#fff!important}
+[data-testid="stSidebar"] .stButton>button[kind="secondary"] {background:#174c70!important;color:#f3fbff!important;border:1px solid #5684a1!important}
+[data-testid="stSidebar"] .stButton>button[kind="primary"] {background:#0aa1af!important;color:#fff!important}
+.fac-landing {background:linear-gradient(118deg,#e7f6fc 0%,#d4eef6 65%,#b8e5ee 100%)!important;border:1px solid #b6dce8!important;box-shadow:0 12px 32px #15415b12!important}
+.fac-landing h2 {color:#0c3457!important}.fac-landing h2 em {color:#008c9c!important}
+.fac-landing p {color:#284d66!important}.fac-eyebrow {color:#047c92!important}
+.fac-tag {background:#ffffffaa!important;color:#0a5269!important;border:1px solid #9fd1dc!important}
+.fac-feature {background:white;border:1px solid #dceaf0;border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 6px 20px #16415a0b}
+.fac-feature h2 {font-size:1.55rem!important;color:#0a3556!important;margin:0 0 12px}
+.fac-feature h3 {font-size:1.1rem!important;color:#0a5771!important;margin:15px 0 8px}
+.fac-feature p {color:#35556d;line-height:1.75;margin:8px 0}
+.fac-feature ul {color:#35556d;line-height:1.85;padding-left:22px}
+.fac-publications {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0}
+.fac-publications .fac-card {border-top-color:#13a8b3}
+@media(max-width:760px){.fac-feature{padding:18px 15px}.fac-publications{grid-template-columns:1fr}.fac-landing{padding:26px 18px!important}}
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -175,8 +198,20 @@ if page in ['Início','O Projeto','Metodologia','Plataforma','Pesquisador','Publ
    if st.button('Experimentar a plataforma →',type='primary',use_container_width=True,key='cta_home'):navigate('Visão geral');st.rerun()
   with cta2:
    if st.button('Conhecer a metodologia',use_container_width=True,key='cta_method'):navigate('Metodologia');st.rerun()
-  st.markdown('<div class="fac-section"><h2>Ciência aplicada à IA responsável</h2><p>Desenvolvido no Programa de Pós-Graduação em Inovação Tecnológica (PPGIT/UFMG), o FAC-IA Saúde transforma uma matriz metodológica de pesquisa em uma experiência digital de avaliação.</p></div>',unsafe_allow_html=True)
-  st.markdown('<div class="fac-cards"><div class="fac-card"><b>◈ Avaliação estruturada</b><p>45 critérios distribuídos em cinco domínios de conformidade.</p></div><div class="fac-card"><b>◎ Evidências e transparência</b><p>Registro de evidências, justificativas e recomendações.</p></div><div class="fac-card"><b>▤ Resultados interpretáveis</b><p>Indicadores de conformidade e cobertura por avaliação.</p></div></div>',unsafe_allow_html=True)
+  st.markdown('''<section class="fac-feature"><h2>FAC-IA Saúde — Ciência, tecnologia e responsabilidade</h2><p><strong>Tecnologia, ciência e responsabilidade para uma Inteligência Artificial mais segura, transparente e confiável na saúde.</strong></p><p>O FAC-IA Saúde é uma iniciativa acadêmica desenvolvida no Programa de Pós-Graduação em Inovação Tecnológica (PPGIT), da Universidade Federal de Minas Gerais (UFMG), para contribuir com a avaliação multidimensional da conformidade de modelos de Inteligência Artificial aplicados à saúde.</p><p>A proposta integra aspectos técnicos, éticos e regulatórios em um instrumento estruturado de avaliação, apoiando a identificação de riscos, lacunas de governança, necessidades de transparência e oportunidades de melhoria.</p><p><strong>Explore o framework, conheça sua fundamentação científica e experimente a plataforma interativa.</strong></p></section>''',unsafe_allow_html=True)
+  st.markdown('''<section class="fac-feature"><h2>Sobre o projeto</h2><h3>Da pesquisa científica à aplicação prática</h3><p>O FAC-IA Saúde foi desenvolvido como artefato de pesquisa com a metodologia <strong>Design Science Research (DSR)</strong>, no contexto da dissertação de mestrado <em>“Avaliação e Conformidade de Modelos de IA Responsável em Saúde”</em>.</p><ul><li><strong>3 pilares:</strong> técnico, ético e regulatório.</li><li><strong>5 domínios:</strong> governança; dados e LGPD; segurança e risco clínico; transparência e explicabilidade; robustez e monitoramento.</li><li><strong>45 critérios de avaliação</strong> organizados em matriz operacional.</li><li><strong>Escala de 0 a 4</strong>, com estados AV, NA e NV, evidências e indicadores de cobertura.</li></ul><p>A plataforma permite explorar critérios, registrar avaliações e visualizar resultados por domínio e dimensão. O instrumento está em desenvolvimento acadêmico e aplicação exploratória; não constitui certificação regulatória ou validação de segurança clínica.</p></section>''',unsafe_allow_html=True)
+  st.markdown('''<section class="fac-feature"><h2>Sobre o pesquisador</h2><h3>Bruno Martins Bartolomeu</h3><p><strong>Pesquisador em Inteligência Artificial Responsável | Ciência de Dados | Governança de IA</strong></p><p>Mestrando no PPGIT/UFMG, sob orientação do Prof. Dr. Wagner Meira Jr., do Departamento de Ciência da Computação (DCC/UFMG).</p><p>Atua em Tecnologia da Informação e Dados, com experiência em análise de dados, inteligência de negócios, soluções tecnológicas, liderança de equipes e docência no ensino superior.</p><p>Sua pesquisa concentra-se em avaliação de conformidade, governança, transparência e responsabilidade da Inteligência Artificial, especialmente na saúde. O FAC-IA Saúde integra sua trajetória profissional em tecnologia à pesquisa acadêmica.</p></section>''',unsafe_allow_html=True)
+  left,right=st.columns([1,2],gap='medium')
+  with left:st.image(str(ROOT/'assets/pesquisador.jpeg'),caption='Bruno Martins Bartolomeu',use_container_width=True)
+  with right:
+   st.markdown('### Pesquisador responsável')
+   st.markdown('**PPGIT / Universidade Federal de Minas Gerais**')
+   st.link_button('Consultar Currículo Lattes ↗','http://lattes.cnpq.br/4479037178271028',use_container_width=True)
+  st.markdown('''<section class="fac-feature"><h2>Produção científica e perspectivas</h2><p>A pesquisa estabelece uma base para aprofundamento científico em governança, conformidade e IA Responsável em Saúde. Estão previstas quatro frentes de artigos e uma proposta de livro. Os temas abaixo representam planejamento acadêmico, não necessariamente publicações concluídas.</p></section>''',unsafe_allow_html=True)
+  st.markdown('<div class="fac-publications">'+''.join(f'<div class="fac-card"><b>{label}</b><p>{title}</p></div>' for label,title in PUBLICATIONS)+'</div>',unsafe_allow_html=True)
+  st.markdown('''<div class="fac-card"><b>📖 Proposta de livro</b><p><em>IA Responsável em Saúde: Fundamentos, Avaliação e Conformidade com o FAC-IA Saúde.</em></p></div>''',unsafe_allow_html=True)
+  st.markdown('''<section class="fac-feature"><h2>Experimente o FAC-IA Saúde</h2><h3>Da metodologia à experiência interativa</h3><p>Conheça os domínios, explore os 45 critérios de conformidade e compreenda como o instrumento pode apoiar avaliações estruturadas de modelos de Inteligência Artificial em saúde.</p></section>''',unsafe_allow_html=True)
+  if st.button('Iniciar avaliação na plataforma →',type='primary',key='cta_start_bottom',use_container_width=True):navigate('Visão geral');st.rerun()
  elif page=='O Projeto':
   st.markdown('<div class="fac-section"><h2>Sobre o FAC-IA Saúde</h2><p>O framework é um artefato acadêmico desenvolvido no contexto da dissertação “Avaliação e Conformidade de Modelos de IA Responsável em Saúde”, no PPGIT/UFMG, sob orientação do Prof. Dr. Wagner Meira Jr. A proposta reúne aspectos técnicos, éticos e regulatórios para apoiar a avaliação de modelos de IA em saúde.</p></div>',unsafe_allow_html=True)
   st.markdown('<div class="fac-cards"><div class="fac-card"><b>3 perspectivas</b><p>Técnica, ética e regulatória.</p></div><div class="fac-card"><b>5 domínios</b><p>Governança; dados e LGPD; segurança e risco clínico; transparência e explicabilidade; robustez e monitoramento.</p></div><div class="fac-card"><b>45 critérios</b><p>Escala ordinal de 0 a 4, com estados AV, NA e NV e evidências associadas.</p></div></div>',unsafe_allow_html=True)
