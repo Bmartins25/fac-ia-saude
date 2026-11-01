@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import sqlite3, json, io
+from html import escape as html_escape
 from pathlib import Path
 from datetime import datetime
 ROOT=Path(__file__).parent
@@ -295,6 +296,22 @@ h1{font-size:2.1rem!important}
   [data-testid="stForm"] {padding:16px!important}
 }
 
+
+
+/* Base de critérios: tabela clara, responsiva e legível, inclusive no mobile */
+.fac-criteria-scroll{width:100%;overflow:auto;max-height:620px;border:1px solid #cfe1ed;border-radius:14px;background:#fff;margin:12px 0 18px;overscroll-behavior:contain}
+.fac-criteria-table{width:100%;border-collapse:separate;border-spacing:0;min-width:920px;background:#fff;color:#123250;font-size:.82rem;line-height:1.5}
+.fac-criteria-table th{position:sticky;top:0;z-index:1;text-align:left;background:#e4f3f8;color:#0b3657;font-weight:750;padding:13px 14px;border-bottom:2px solid #9acddc;white-space:nowrap}
+.fac-criteria-table td{padding:11px 14px;border-bottom:1px solid #e4edf3;vertical-align:top;min-width:110px;max-width:400px;overflow-wrap:anywhere;color:#173c5a;background:#fff}
+.fac-criteria-table tr:nth-child(even) td{background:#f5fafd}
+.fac-criteria-table tr:hover td{background:#e8f7fa}
+.fac-criteria-table td:first-child,.fac-criteria-table th:first-child{position:sticky;left:0;z-index:2;min-width:65px;background:#eaf5f9;font-weight:700}
+.fac-criteria-table th:first-child{z-index:3;background:#d9eef5}
+[data-testid="stExpander"]{background:#fff!important;border:1px solid #cfe1ed!important;border-radius:12px!important}
+[data-testid="stExpander"] summary, [data-testid="stExpander"] summary p{color:#123250!important}
+[data-testid="stExpander"] [data-testid="stRadio"] label p{color:#123250!important}
+@media(max-width:767px){.fac-criteria-table{font-size:.88rem}.fac-criteria-table td{padding:12px 10px}.fac-criteria-scroll{max-height:540px}}
+
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
@@ -556,7 +573,14 @@ if page=='Metodologia e limites':
 if page=='Base de critérios':
  st.subheader('Base de critérios · Apêndice A')
  st.caption('Consulta à matriz operacional dos 45 critérios, preservada do projeto original.')
- domain_filter=st.selectbox('Filtrar domínio',['Todos']+DOMAINS)
+ # O filtro utiliza botões claros, evitando o menu escuro nativo do navegador.
+ with st.expander('Filtrar por domínio', expanded=False):
+  domain_filter=st.radio('Selecione o domínio',['Todos']+DOMAINS, key='base_criterios_dominio', label_visibility='collapsed')
  filtered=[x for x in CRITERIA if domain_filter=='Todos' or x['dominio']==domain_filter]
- st.dataframe(pd.DataFrame(filtered),use_container_width=True,hide_index=True)
+ st.caption(f'{len(filtered)} critério(s) exibido(s)')
+ # Tabela HTML com cores controladas: o st.dataframe utiliza canvas com tema escuro em alguns dispositivos.
+ columns=list(CRITERIA[0].keys()) if CRITERIA else []
+ headings=''.join(f'<th scope="col">{html_escape(str(c).replace("_", " ").capitalize())}</th>' for c in columns)
+ body=''.join('<tr>'+''.join(f'<td>{html_escape(str(item.get(c, "") if item.get(c) is not None else ""))}</td>' for c in columns)+'</tr>' for item in filtered)
+ st.markdown('<div class="fac-criteria-scroll"><table class="fac-criteria-table"><thead><tr>'+headings+'</tr></thead><tbody>'+body+'</tbody></table></div>',unsafe_allow_html=True)
  st.download_button('Exportar base de critérios CSV',pd.DataFrame(filtered).to_csv(index=False).encode('utf-8-sig'),file_name='fac_ia_criterios.csv',mime='text/csv')
