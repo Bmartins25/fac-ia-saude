@@ -169,6 +169,37 @@ h1{font-size:2.1rem!important}
 .fac-section .fac-eyebrow{color:#008b9f!important}
 @media(max-width:1050px){.fac-method-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.fac-method-grid{grid-template-columns:1fr}.fac-method-card{min-height:auto}}
+
+/* Formulário Contato: campos claros, legíveis e consistentes com a identidade FAC-IA */
+[data-testid="stForm"] [data-testid="stTextInput"] input,
+[data-testid="stForm"] [data-testid="stTextArea"] textarea,
+[data-testid="stForm"] [data-baseweb="select"] > div,
+[data-testid="stForm"] [data-baseweb="input"] > div {
+  background-color:#ffffff!important;
+  color:#123250!important;
+  border:1px solid #b9d6e4!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
+}
+[data-testid="stForm"] input::placeholder,
+[data-testid="stForm"] textarea::placeholder{color:#6a8396!important;opacity:1!important}
+[data-testid="stForm"] label,
+[data-testid="stForm"] label p,
+[data-testid="stForm"] [data-testid="stWidgetLabel"] p,
+[data-testid="stForm"] [data-testid="stCheckbox"] p{color:#153b59!important;font-weight:600!important}
+[data-testid="stForm"] [data-baseweb="select"] span,
+[data-testid="stForm"] [data-baseweb="select"] svg{color:#123250!important;fill:#123250!important}
+[data-testid="stForm"] input:focus,
+[data-testid="stForm"] textarea:focus,
+[data-testid="stForm"] [data-baseweb="select"] > div:focus-within{border-color:#079cac!important;box-shadow:0 0 0 2px #079cac25!important}
+[data-testid="stForm"] button[kind="primary"],
+[data-testid="stForm"] button[data-testid="stBaseButton-primary"]{background:#07879e!important;border:1px solid #07879e!important;color:white!important;border-radius:10px!important}
+[data-testid="stForm"] button[kind="primary"]:hover{background:#056d84!important}
+/* Menu de opções do select, quando aberto */
+[data-baseweb="popover"] [role="listbox"],
+[data-baseweb="popover"] [role="option"]{background:#ffffff!important;color:#123250!important}
+[data-baseweb="popover"] [role="option"]:hover{background:#e6f6fa!important}
+
 </style>""",unsafe_allow_html=True)
 def connect():
  c=sqlite3.connect(DB);c.row_factory=sqlite3.Row;return c
